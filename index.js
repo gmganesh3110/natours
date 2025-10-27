@@ -5,6 +5,8 @@ const cors=require('cors');
 
 dotenv.config({path:'./.env'});
 
+const tourRoutes=require('./routes/tourRoutes')
+
 const app=express();
 
 // MIDDLEWARES
@@ -20,6 +22,10 @@ connection();
 app.get('/',(req,res)=>{
     res.send('Natours API is running');
 });
+
+
+app.use("/api/tour",tourRoutes)
+
 
 const PORT=process.env.PORT || 3000;
 
