@@ -12,6 +12,10 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors());
 
+// DATABASE CONNECTION
+const connection=require('./database/connection');
+connection();
+
 // ROUTES
 app.get('/',(req,res)=>{
     res.send('Natours API is running');
