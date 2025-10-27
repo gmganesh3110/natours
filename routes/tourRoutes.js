@@ -4,15 +4,20 @@ const {
   getTour,
   updateTour,
   deleteTour,
-  getAllTours
+  getAllTours,
+  top5CheapTours,
+  getTourStats,
+  getMonthlyPlan,
 } = require("../controllers/tourController");
 
 const router = express.Router();
 
-router.post("/", createTour);
-router.get("/", getAllTours);
-router.get("/:id", getTour);
-router.patch("/:id", updateTour);
-router.delete("/:id", deleteTour);
+// Alias route - place it before other routes
+router.route("/top-5-cheap").get(top5CheapTours, getAllTours);
+router.route("/tour-stats").get(getTourStats);
+router.route("/monthly-plan/:year").get(getMonthlyPlan);
+router.route("/").get(getAllTours).post(createTour);
+
+router.route("/:id").get(getTour).patch(updateTour).delete(deleteTour);
 
 module.exports = router;
